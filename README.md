@@ -1,5 +1,5 @@
-# Projecte 2
-## Projecte per a l'assignatura de l'etseib projecte 2
+# Projecte II
+## Projecte per a l'assignatura de l'ETSEIB Projecte 2
 
 Integrants: Iñigo Moreno i Esteve Tarragó
 
