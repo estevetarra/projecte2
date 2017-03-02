@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>  Projecte 2 - garatge </title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="../vendor/morrisjs/morris.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+
+        <div id="page-wrapper" style="margin-left: 0;">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Open Garage</h1>
+                </div>
+            </div>
+            <!-- Open door -->
+            <div class="row">
+              <div class="col-lg-12">
+                <a href="#">
+                  <div class="panel panel-green">
+                      <div class="panel-heading">
+                          <div class="row">
+                              <div class="col-xs-3">
+                                  <i class="fa fa-sign-out fa-5x"></i>
+                              </div>
+                              <div class="col-xs-9 text-right">
+                                  <div class="huge">Open door</div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <!-- Info (Cars , Motorcycles, Last Oppening) -->
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-automobile fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">3</div>
+                                    <div>Cars inside </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="panel panel-yellow">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-motorcycle fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">2</div>
+                                    <div>Motorcycles inside</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="panel panel-red">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-sign-out fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">43</div>
+                                    <div>Minutes since openning</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts and notifications -->
+            <div class="row">
+              <!-- notifications -->
+              <div class="col-lg-4">
+                  <div class="panel panel-default">
+                      <div class="panel-heading">
+                          <i class="fa fa-bell fa-fw"></i> Notifications Panel
+                      </div>
+                      <!-- /.panel-heading -->
+                      <div class="panel-body">
+                          <div class="list-group">
+                              <a href="#" class="list-group-item">
+                                  <i class="fa fa-sign-out fa-fw"></i> Door open
+                                  <span class="pull-right text-muted small"><em>44 minutes ago</em>
+                                  </span>
+                              </a>
+                              <a href="#" class="list-group-item">
+                                  <i class="fa fa-automobile fa-fw"></i> Car out
+                                  <span class="pull-right text-muted small"><em>12 minutes ago</em>
+                                  </span>
+                              </a>
+                              <a href="#" class="list-group-item">
+                                  <i class="fa fa-sign-out fa-fw"></i> Door open
+                                  <span class="pull-right text-muted small"><em>44 minutes ago</em>
+                                  </span>
+                              </a>
+                              <a href="#" class="list-group-item">
+                                  <i class="fa fa-motorcycle fa-fw"></i> Motorcycle out
+                                  <span class="pull-right text-muted small"><em>43 minutes ago</em>
+                                  </span>
+                              </a>
+                              <a href="#" class="list-group-item">
+                                  <i class="fa fa-sign-out fa-fw"></i> Door open
+                                  <span class="pull-right text-muted small"><em>44 minutes ago</em>
+                                  </span>
+                              </a>
+                              <a href="#" class="list-group-item">
+                                  <i class="fa fa-automobile fa-fw"></i> Car in
+                                  <span class="pull-right text-muted small"><em>27 minutes ago</em>
+                                  </span>
+                              </a>
+                              <a href="#" class="list-group-item">
+                                  <i class="fa fa-sign-out fa-fw"></i> Door open
+                                  <span class="pull-right text-muted small"><em>44 minutes ago</em>
+                                  </span>
+                              </a>
+                              <a href="#" class="list-group-item">
+                                  <i class="fa fa-motorcycle fa-fw"></i> Motorcycle out
+                                  <span class="pull-right text-muted small"><em>43 minutes ago</em>
+                                  </span>
+                              </a>
+
+                          </div>
+                          <!-- /.list-group -->
+                          <a href="#" class="btn btn-default btn-block">View All Alerts</a>
+                      </div>
+                      <!-- /.panel-body -->
+                  </div>
+              </div>
+              <!-- /.col-lg-4 -->
+              <div class="col-lg-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-bar-chart-o fa-fw"></i> Garage stats
+                            <div class="pull-right">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                        Period
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu pull-right" role="menu">
+                                        <li><a href="#"> All days</a>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">Monday</a>
+                                        </li>
+                                        <li><a href="#">Tuesday</a>
+                                        </li>
+                                        <li><a href="#">Wendsdat</a>
+                                        </li>
+                                        <li><a href="#">Thursday</a>
+                                        </li>
+                                        <li><a href="#">Friday</a>
+                                        </li>
+                                        <li><a href="#">Saturday</a>
+                                        </li>
+                                        <li><a href="#">Sunday</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div id="morris-area-chart"></div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+
+              </div>
+
+
+                <!-- /.col-lg-8 -->
+
+            </div>
+            <div class="row">
+              <div class="col-lg-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-bar-chart-o fa-fw"></i> Recording table
+
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Date</th>
+                                                    <th>Time</th>
+                                                    <th>Object</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>3326</td>
+                                                    <td>10/21/2013</td>
+                                                    <td>3:29 PM</td>
+                                                    <td>Car 1234 BBB </td>
+                                                    <td>Out</td>
+                                                </tr>
+                                                <tr>
+                                                  <td>3326</td>
+                                                  <td>10/21/2013</td>
+                                                  <td>3:29 PM</td>
+                                                  <td>Moto 4321 CCC </td>
+                                                  <td>In</td>
+                                                </tr>
+                                                <tr>
+                                                  <td>3326</td>
+                                                  <td>10/21/2013</td>
+                                                  <td>3:29 PM</td>
+                                                  <td>Car 1234 BBB </td>
+                                                  <td>In</td>
+                                                </tr>
+                                                <tr>
+                                                  <td>3326</td>
+                                                  <td>10/21/2013</td>
+                                                  <td>3:29 PM</td>
+                                                  <td>Door</td>
+                                                  <td>Open</td>
+                                                </tr>
+                                                <tr>
+                                                  <td>3326</td>
+                                                  <td>10/21/2013</td>
+                                                  <td>3:29 PM</td>
+                                                  <td>Car 1234 BBB </td>
+                                                  <td>Out</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- /.table-responsive -->
+                                </div>
+
+                            </div>
+                            <!-- /.row -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+
+              </div>
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+
+
+
+    <!-- jQuery -->
+    <script src="../vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="../vendor/metisMenu/metisMenu.min.js"></script>
+
+    <!-- Morris Charts JavaScript -->
+    <script src="../vendor/raphael/raphael.min.js"></script>
+    <script src="../vendor/morrisjs/morris.min.js"></script>
+    <script src="../data/morris-data.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="../dist/js/sb-admin-2.js"></script>
+
+</body>
+
+</html>

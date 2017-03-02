@@ -1,0 +1,28 @@
+{
+  "name": "open-garage",
+  "version": "1.0.0",
+  "description": "Projecte 2 ETSEIB",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.15.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/estevetarra/projecte2.git"
+  },
+  "keywords": [
+    "raspberry",
+    "pi",
+    "garage"
+  ],
+  "author": "Inigo Moreno & Esteve Tarrago",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/estevetarra/projecte2/issues"
+  },
+  "homepage": "https://github.com/estevetarra/projecte2#readme"
+}
