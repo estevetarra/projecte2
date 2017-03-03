@@ -23,6 +23,8 @@
     <!-- Morris Charts CSS -->
     <link href="../vendor/morrisjs/morris.css" rel="stylesheet">
 
+    <script  src="https://code.jquery.com/jquery-3.1.1.min.js"  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="  crossorigin="anonymous"></script>
+
     <!-- Custom Fonts -->
     <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
@@ -45,23 +47,10 @@
                 </div>
             </div>
             <!-- Open door -->
-            <script>
-            function sendOpen() {
-              var xhr = new XMLHttpRequest();
-              xhr.open('POST', 'http://localhost:3000/openDoor');
-              xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-              xhr.onload = function() {
-                var result = JSON.parse(xhr.responseText)
-                if (result.status!='0'){
-                  alert('We could not reach the door');
-                }
-              }
-            }
-            </script>
+
             <div class="row">
               <div class="col-lg-12">
-                <a href="#" onclick="sendOpen">
-                  <div class="panel panel-green">
+                  <div class="panel panel-green" id="openButton">
                       <div class="panel-heading">
                           <div class="row">
                               <div class="col-xs-3">
@@ -73,9 +62,25 @@
                           </div>
                       </div>
                   </div>
-                </a>
               </div>
             </div>
+            <script>
+            var sendOpenf = function sendOpen() {
+              var xhr = new XMLHttpRequest();
+              xhr.open('POST', 'http://localhost:3000/openDoor');
+              xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+              xhr.onload = function() {
+                var result = JSON.parse(xhr.responseText)
+                if (result.status!='0'){
+                  alert('We could not reach the door');
+                } else
+                {
+                  alert('Send succesfully');
+                }
+              }
+            }
+            $('#openButton').click(sendOpenf);
+            </script>
 
             <!-- Info (Cars , Motorcycles, Last Oppening) -->
             <div class="row">
