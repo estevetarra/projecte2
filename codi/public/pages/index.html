@@ -45,9 +45,22 @@
                 </div>
             </div>
             <!-- Open door -->
+            <script>
+            function sendOpen() {
+              var xhr = new XMLHttpRequest();
+              xhr.open('POST', 'http://localhost:3000/openDoor');
+              xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+              xhr.onload = function() {
+                var result = JSON.parse(xhr.responseText)
+                if (result.status!='0'){
+                  alert('We could not reach the door');
+                }
+              }
+            }
+            </script>
             <div class="row">
               <div class="col-lg-12">
-                <a href="#">
+                <a href="#" onclick="sendOpen">
                   <div class="panel panel-green">
                       <div class="panel-heading">
                           <div class="row">
@@ -238,78 +251,6 @@
 
                 <!-- /.col-lg-8 -->
 
-            </div>
-            <div class="row">
-              <div class="col-lg-8">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <i class="fa fa-bar-chart-o fa-fw"></i> Recording table
-
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-hover table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Date</th>
-                                                    <th>Time</th>
-                                                    <th>Object</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>3326</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>3:29 PM</td>
-                                                    <td>Car 1234 BBB </td>
-                                                    <td>Out</td>
-                                                </tr>
-                                                <tr>
-                                                  <td>3326</td>
-                                                  <td>10/21/2013</td>
-                                                  <td>3:29 PM</td>
-                                                  <td>Moto 4321 CCC </td>
-                                                  <td>In</td>
-                                                </tr>
-                                                <tr>
-                                                  <td>3326</td>
-                                                  <td>10/21/2013</td>
-                                                  <td>3:29 PM</td>
-                                                  <td>Car 1234 BBB </td>
-                                                  <td>In</td>
-                                                </tr>
-                                                <tr>
-                                                  <td>3326</td>
-                                                  <td>10/21/2013</td>
-                                                  <td>3:29 PM</td>
-                                                  <td>Door</td>
-                                                  <td>Open</td>
-                                                </tr>
-                                                <tr>
-                                                  <td>3326</td>
-                                                  <td>10/21/2013</td>
-                                                  <td>3:29 PM</td>
-                                                  <td>Car 1234 BBB </td>
-                                                  <td>Out</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <!-- /.table-responsive -->
-                                </div>
-
-                            </div>
-                            <!-- /.row -->
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-
-              </div>
             </div>
             <!-- /.row -->
         </div>
