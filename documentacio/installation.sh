@@ -7,4 +7,4 @@ sudo apt-get install -y $DEBIAN_PROGS
 git clone https://github.com/estevetarra/projecte2.git
 cd projecte2
 cd codi
-nmp install
+npm install
