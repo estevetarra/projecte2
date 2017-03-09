@@ -1,6 +1,6 @@
 var cv = require('opencv');
 
-cv.readImage("./cie.jpg", function(err, im){
+cv.readImage("./patins.jpg", function(err, im){
   im.detectObject(cv.FACE_CASCADE, {}, function(err, faces){
     for (var i=0;i<faces.length; i++){
       var x = faces[i]
