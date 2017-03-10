@@ -1,21 +1,8 @@
 var express = require('express')
+var piblaster = require('pi-blaster.js');
 var app = express()
+var led = 0;
 
-var Cylon = require("cylon");
-
-Cylon.robot({
-  connections: {
-    raspi: { adaptor: 'raspi' }
-  },
-
-  devices: {
-    led: { driver: 'led', pin: 40 }
-  },
-
-  work: function(my) {
-    every((1).second(), my.led.toggle);
-  }
-}).start();
 
 //making files in public served at /
 app.use(express.static('public'))
@@ -36,6 +23,11 @@ app.get('/', function (req, res) {
      console.log('Sent:', "index.html");
    }
  });
+})
+
+app.post('/openDoor', function (req, res) {
+  led = 1 - led;
+  piblaster.setPwm(21, led ); 
 })
 
 app.listen(3000, function () {
