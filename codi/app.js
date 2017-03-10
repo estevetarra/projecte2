@@ -1,13 +1,25 @@
-var express = require('express')
+﻿var express = require('express');
+var ipaddr = require('ipaddr.js');
 var piblaster = require('pi-blaster.js');
+var useragent = require('useragent');
 
 
 var app = express()
 var servo_pos = 0;
 
-
-
-
+function getIp(text) {
+  if (ipaddr.IPv4.isValid(text)){
+    return text;
+  }
+  else if (ipaddr.IPv6.isValid(text)){
+    var ip = ipaddr.IPv6.parse(text);
+    if (ip.isIPv4MappedAddress()){
+      return ip.toIPv4Address().toString();
+    }
+    else return text;
+  }
+  else return "IP not valid";
+}
 
 //making files in public served at /
 app.use(express.static('public'))
@@ -40,11 +52,22 @@ app.post('/openDoor', function (req, res) {
 
 
   var servo_pwm=[0.088,0.05];
-  piblaster.setPwm(21,servo_pwm[0]);
-  setTimeout(function(){
-      piblaster.setPwm(21,servo_pwm[1]);
-  },1500);
+  piblaster.setPwm(21,servo_pwm[0],function(){
+  	setTimeout(function(){
+  	    piblaster.setPwm(21,servo_pwm[1],function(){});
+  	},1500);
+  });
   var ret = {};
+  console.log(getIp(req.connection.remoteAddress));
+  var agent = useragent.parse(req.headers['user-agent']);
+  //console.log(JSON.stringify(agent));
+  if (agent.device.family=="Other"){
+    console.log(''+agent.os.family+' '+agent.family);
+  }
+  else{
+    console.log(''+agent.device.family+' '+agent.family);
+  }
+  
   ret.status = 0;
   res.json(ret);
 })
