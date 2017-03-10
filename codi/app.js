@@ -1,7 +1,6 @@
 var express = require('express')
 var piblaster = require('pi-blaster.js');
-var PiServo = require('pi-servo')
-var servo = new PiServo(21)
+
 
 var app = express()
 var servo_pos = 0;
@@ -34,16 +33,16 @@ app.get('/', function (req, res) {
 app.post('/openDoor', function (req, res) {
   if( servo_pos < 90){
     //for (servo_pos = 0; servo_pos < 180; servo_pos+=10){
-      servo_pos=180;
+      servo_pos=160;
     
   } else {
-    //for (servo_pos = 180; servo_pos > 0; servo-=10){
-      servo_pos=0;   
+    //for (servo_pos = 180; servo_pos > 0; servo_pos-=10){
+      servo_pos=20;   
   }
-  servo.open().then(function (){
-    servo.setDegree(servo_pos);
-  });
-  console.log ("moviment finalitzat",servo);
+  var servo_pwm=servo_pos*0.2/180;
+  piblaster.setPwm(21,servo_pwm);
+  console.log(servo_pwm);
+  console.log ("moviment finalitzat",servo_pos);
   var ret = {};
   ret.status = 0;
   res.json(ret);
