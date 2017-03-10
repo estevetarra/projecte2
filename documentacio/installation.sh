@@ -1,6 +1,6 @@
 #!/bin/bash - 
 echo -e "$RED Debian or Debian derivative OS distro detected, installing programs.. $STD"
-DEBIAN_PROGS="nodejs  build-essential"
+DEBIAN_PROGS="nodejs npm build-essential"
 #mongodb libopencv-dev"
 sudo apt-get update
 curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -
