@@ -43,7 +43,7 @@ app.post('/openDoor', function (req, res) {
   piblaster.setPwm(21,servo_pwm[0]);
   setTimeout(function(){
       piblaster.setPwm(21,servo_pwm[1]);
-  });
+  },1500);
   var ret = {};
   ret.status = 0;
   res.json(ret);
