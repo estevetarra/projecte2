@@ -26,6 +26,7 @@ app.get('/', function (req, res) {
 })
 
 app.post('/openDoor', function (req, res) {
+  console.log('Esteve es un geni')
   led = 1 - led;
   piblaster.setPwm(21, led ); 
 })
