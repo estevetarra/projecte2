@@ -67,7 +67,7 @@
             <script>
             var sendOpenf = function sendOpen() {
               var xhr = new XMLHttpRequest();
-              xhr.open('POST', 'http://localhost:3000/openDoor');
+              xhr.open('POST', 'http://10.5.3.127:3000/openDoor');
               xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
               xhr.onload = function() {
                 var result = JSON.parse(xhr.responseText)
@@ -78,6 +78,7 @@
                   alert('Send succesfully');
                 }
               }
+              xhr.send("");
             }
             $('#openButton').click(sendOpenf);
             </script>
