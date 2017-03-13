@@ -5,6 +5,8 @@ DEBIAN_PROGS="nodejs npm build-essential"
 sudo apt-get update
 curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -
 sudo apt-get install -y $DEBIAN_PROGS
+sudo apt-get update && sudo apt-get install -y openalpr openalpr-daemon openalpr-utils libopenalpr-dev
+
 #git clone https://github.com/estevetarra/projecte2.git
 #cd projecte2
 #cd codi

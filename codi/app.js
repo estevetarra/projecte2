@@ -1,12 +1,27 @@
 var express = require('express')
 var piblaster = require('pi-blaster.js');
-var openalpr = require ("node-openalpr");
+var openalpr = require ("node-openalpr");
 
 var app = express()
 var led = 0;
 
-openalpr.Start ();
-console.log(openalpr.GetVersion ());
+openalpr.Start();
+console.log(openalpr);
+
+
+openalpr.IdentifyLicense ("plate_img/9.jpg", function (error, output) {
+        var results = output.results;
+        console.log(output);
+        for (platekey in results){
+            plate = results[platekey];
+            if (plate.confidence > 50) {
+                console.log("plate : " + plate.plate + " conf : " + plate.confidence);            
+            }        
+        }        
+    });
+
+
+
 
 
 //making files in public served at /
@@ -36,6 +51,6 @@ app.post('/openDoor', function (req, res) {
   piblaster.setPwm(21, led );
 })
 
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!')
+app.listen(2000, function () {
+  console.log('Example app listening on port 2000!')
 })
