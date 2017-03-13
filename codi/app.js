@@ -1,7 +1,12 @@
 var express = require('express')
 var piblaster = require('pi-blaster.js');
+var openalpr = require ("node-openalpr");
+
 var app = express()
 var led = 0;
+
+openalpr.Start ();
+console.log(openalpr.GetVersion ());
 
 
 //making files in public served at /
@@ -28,7 +33,7 @@ app.get('/', function (req, res) {
 app.post('/openDoor', function (req, res) {
   console.log('Esteve es un geni')
   led = 1 - led;
-  piblaster.setPwm(21, led ); 
+  piblaster.setPwm(21, led );
 })
 
 app.listen(3000, function () {
