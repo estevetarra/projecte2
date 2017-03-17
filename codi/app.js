@@ -32,11 +32,11 @@ app.get('/', function (req, res) {
 app.post('/openDoor', function (req, res) {
   if( servo == 0){
     for (servo = 0; servo <= 180; ++servo){
-      piblaster.setPwm(21, double(servo)/180);
+      piblaster.setPwm(21, parseFloat(servo)/parseFloat(180));
     }
   } else {
     for (servo = 180; servo >= 180; --servo){
-      piblaster.setPwm(21, double(servo)/180);
+      piblaster.setPwm(21, parseFloat(servo)/parseFloat(180));
     }
   }
   consoloe.log ("moviment finalitzat");
