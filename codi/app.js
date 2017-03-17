@@ -1,24 +1,8 @@
 var express = require('express')
 var piblaster = require('pi-blaster.js');
-var openalpr = require ("node-openalpr");
 
 var app = express()
-var led = 0;
-
-openalpr.Start();
-console.log(openalpr);
-
-
-openalpr.IdentifyLicense ("plate_img/9.jpg", function (error, output) {
-        var results = output.results;
-        console.log(output);
-        for (platekey in results){
-            plate = results[platekey];
-            if (plate.confidence > 50) {
-                console.log("plate : " + plate.plate + " conf : " + plate.confidence);            
-            }        
-        }        
-    });
+var servo = 0;
 
 
 
@@ -46,11 +30,21 @@ app.get('/', function (req, res) {
 })
 
 app.post('/openDoor', function (req, res) {
-  console.log('Esteve es un geni')
-  led = 1 - led;
-  piblaster.setPwm(21, led );
+  if( servo == 0){
+    for (servo = 0; servo <= 180; ++servo){
+      piblaster.setPwm(21, double(servo)/180);
+    }
+  } else {
+    for (servo = 180; servo >= 180; --servo){
+      piblaster.setPwm(21, double(servo)/180);
+    }
+  }
+  consoloe.log ("moviment finalitzat");
+  var ret = {};
+  ret.status = 0;
+  res.json(ret);
 })
 
-app.listen(2000, function () {
-  console.log('Example app listening on port 2000!')
+app.listen(3000, function () {
+  console.log('Example app listening on port 3000!')
 })
