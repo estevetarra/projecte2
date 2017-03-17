@@ -33,10 +33,12 @@ app.post('/openDoor', function (req, res) {
   if( servo == 0){
     for (servo = 0; servo <= 180; ++servo){
       piblaster.setPwm(21, parseFloat(servo)/parseFloat(180));
+      for (var i =0; i<400; ++i) ++i;
     }
   } else {
     for (servo = 180; servo >= 180; --servo){
       piblaster.setPwm(21, parseFloat(servo)/parseFloat(180));
+      for (var i =0; i<400; ++i) ++i;
     }
   }
   consoloe.log ("moviment finalitzat");
