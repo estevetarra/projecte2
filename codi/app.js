@@ -1,7 +1,7 @@
 var express = require('express')
 var piblaster = require('pi-blaster.js');
-var piservo = require('pi-servo')
-var servo = new piservo(21) 
+var PiServo = require('pi-servo')
+var servo = new PiServo(21)
 
 var app = express()
 var servo_pos = 0;
@@ -41,8 +41,8 @@ app.post('/openDoor', function (req, res) {
       servo_pos=0;   
   }
   servo.open().then(function (){
-    servo.setDegree(servo_pos)	
-  })  
+    servo.setDegree(servo_pos);
+  });
   console.log ("moviment finalitzat",servo);
   var ret = {};
   ret.status = 0;
