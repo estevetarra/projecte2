@@ -45,9 +45,18 @@ app.get('/', function (req, res) {
 
 
 app.post('/getRecord', function (req, res) {
-    ret={};
+    var ret={};
     ret.status=0;
-    ret.Data=data;
+    ret.Data=[];
+
+    var timeNow=Date.now();
+
+    data.forEach(function(e){
+        var e2=e;
+        e2.Time=timeNow-e2.Time;
+        ret.Data.unshift(e2);
+    });
+
     res.json(ret);
     return ret;
 });
