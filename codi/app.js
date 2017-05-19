@@ -105,6 +105,8 @@ app.post('/openDoor', function (req, res) {
       dataObj.Family="android";
   }
 
+  dataObj.Name=agent.device.family;
+
   data.push(dataObj);
   console.log(JSON.stringify(dataObj));
   ret.status = 0;
