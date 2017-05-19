@@ -50,7 +50,6 @@ app.post('/openDoor', function (req, res) {
   dataObj.Time=Date.now();
   console.log(dataObj.Time);
 
-  data.push(dataObj);
 
   function move_pos(pos){
       var servo_pwm=servo_pos*0.2/180;
@@ -70,15 +69,20 @@ app.post('/openDoor', function (req, res) {
   var agent = useragent.parse(req.headers['user-agent']);
   //console.log(JSON.stringify(agent));
   if (agent.device.family=="Other"){
+    dataObj.DeviceType="PC";
     console.log(''+agent.os.family+' '+agent.family);
   }
   else{
+    dataObj.DeviceType="Mobile";
     console.log(''+agent.device.family+' '+agent.family);
   }
-  
+
+
+  data.push(dataObj);
+  console.log(JSON.stringify(dataObj));
   ret.status = 0;
   res.json(ret);
-})
+});
 
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!')

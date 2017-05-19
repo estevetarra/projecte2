@@ -13,7 +13,7 @@ Get the record of the devices and time the door was opened
         {
             "Time": 0982109, //Timestamp epoch ms
             "Family": iOS/linux/android/windows,
-            "Device type": Mobile/PC,
+            "DeviceType": Mobile/PC,
             "Name": Samsung SM-G920F
          },
          ...
