@@ -100,6 +100,68 @@
             $('#openButton').click(sendOpenf);
             </script>
 
+            <script>
+            //<a href="#" class="list-group-item">
+            //  <i class="fa fa-apple fa-fw"></i> Door open
+            //    <span class="pull-right text-muted small"><em>44 minutes ago</em>
+            //    </span>
+            //</a>
+            function millisToMinutesAndSeconds(millis) {
+              var minutes = Math.floor(millis / 60000);
+              var seconds = ((millis % 60000) / 1000).toFixed(0);
+              return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+            }
+            function recordToDiv(record){
+              var ret = "";
+              ret += "<a href='#' class='list-group-item'>";
+              if (record.DeviceType == "Mobile"){
+                ret += "<i class='fa fa-mobile fa-fw'></i>";
+              } else if (record.DeviceType == "PC") {
+                ret += "<i class='fa fa-desktop fa-fw'></i>";
+              } else {
+                console.log("Unknown DeviceType: " + record.DeviceType);
+              }
+
+              if (record.Family == "iOS"){
+                ret += "<i class='fa fa-apple fa-fw'></i>";
+              } else if (record.Family == "android") {
+                ret += "<i class='fa fa-android fa-fw'></i>";
+              } else if (record.Family == "linux") {
+                ret += "<i class='fa fa-linux fa-fw'></i>";
+              }else if (record.Family == "windows") {
+                ret += "<i class='fa fa-windows fa-fw'></i>";
+              }else {
+                console.log("Unknown Family: " + record.Family);
+              }
+
+              ret+= record.Name;
+              ret+="<span class='pull-right text-muted small'><em>"
+              var d = new Date();
+              var n = d.getTime();
+              ret+= millisToMinutesAndSeconds(n-record.Time);
+              ret+="minutes ago</em></span>"
+              ret += "</a>"
+              return ret;
+            }
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'http://10.5.3.127:3000/getRecord');
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onload = function() {
+              var result = JSON.parse(xhr.responseText)
+              var data = result.Data;
+              var string = "";
+              for (var i=0; i<= Math.min(data.length,7); ++i)
+              {
+                var record = data[i];
+                string += recordToDiv(record);
+              }
+              $('#records').append(string);
+
+            }
+
+            xhr.send("");
+            </script>
+
             <!-- Info (Cars , Motorcycles, Last Oppening) -->
             <div class="row">
 
@@ -115,33 +177,8 @@
                       </div>
                       <!-- /.panel-heading -->
                       <div class="panel-body">
-                          <div class="list-group">
-                              <a href="#" class="list-group-item">
-                                  <i class="fa fa-apple fa-fw"></i> Door open
-                                  <span class="pull-right text-muted small"><em>44 minutes ago</em>
-                                  </span>
-                              </a>
-                              <a href="#" class="list-group-item">
-                                  <i class="fa fa-linux fa-fw"></i> Car out
-                                  <span class="pull-right text-muted small"><em>12 minutes ago</em>
-                                  </span>
-                              </a>
-                              <a href="#" class="list-group-item">
-                                  <i class="fa fa-android fa-fw"></i> Door open
-                                  <span class="pull-right text-muted small"><em>44 minutes ago</em>
-                                  </span>
-                              </a>
-                              <a href="#" class="list-group-item">
-                                  <i class="fa fa-windows fa-fw"></i> Motorcycle out
-                                  <span class="pull-right text-muted small"><em>43 minutes ago</em>
-                                  </span>
-                              </a>
-                              <a href="#" class="list-group-item">
-                                  <i class="fa fa-mobile fa-fw"></i> Door open
-                                  <span class="pull-right text-muted small"><em>44 minutes ago</em>
-                                  </span>
-                              </a>
-                              
+                          <div class="list-group" id="records">
+
                           </div>
                           <!-- /.list-group -->
                           <a href="#" class="btn btn-default btn-block">View All Alerts</a>
