@@ -50,7 +50,7 @@ app.post('/openDoor', function (req, res) {
   dataObj.Time=Date.now();
   console.log(dataObj.Time);
 
-  data.append(dataObj);
+  data.push(dataObj);
 
   function move_pos(pos){
       var servo_pwm=servo_pos*0.2/180;
