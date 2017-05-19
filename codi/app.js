@@ -86,7 +86,7 @@ app.post('/openDoor', function (req, res) {
   var ret = {};
   console.log(getIp(req.connection.remoteAddress));
   var agent = useragent.parse(req.headers['user-agent']);
-  //console.log(JSON.stringify(agent));
+  console.log(JSON.stringify(agent));
   if (agent.device.family=="Other"){
     dataObj.DeviceType="PC";
     console.log(''+agent.os.family+' '+agent.family);
