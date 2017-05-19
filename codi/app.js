@@ -98,7 +98,7 @@ app.post('/openDoor', function (req, res) {
   if (dataObj.Family=="Ubuntu" || dataObj.Family=="Linux"){
       dataObj.Family="linux";
   }
-  else if (dataObj.Family.contains("Windows")){
+  else if (dataObj.Family.indexOf("Windows")>=0){
       dataObj.Family="windows";
   }
   else if (dataObj.Family=="Android"){
