@@ -43,6 +43,25 @@ app.get('/', function (req, res) {
  });
 });
 
+
+app.post('/getRecord', function (req, res) {
+    var ret={};
+    ret.status=0;
+    ret.Data=[];
+
+    var timeNow=Date.now();
+
+    data.forEach(function(e){
+        var e2=e;
+        e2.Time=timeNow-e2.Time;
+        ret.Data.unshift(e2);
+    });
+
+    res.json(ret);
+    return ret;
+});
+
+
 app.post('/openDoor', function (req, res) {
 
   var dataObj={};
@@ -50,7 +69,6 @@ app.post('/openDoor', function (req, res) {
   dataObj.Time=Date.now();
   console.log(dataObj.Time);
 
-  data.push(dataObj);
 
   function move_pos(pos){
       var servo_pwm=servo_pos*0.2/180;
@@ -68,18 +86,32 @@ app.post('/openDoor', function (req, res) {
   var ret = {};
   console.log(getIp(req.connection.remoteAddress));
   var agent = useragent.parse(req.headers['user-agent']);
-  //console.log(JSON.stringify(agent));
+  console.log(JSON.stringify(agent));
   if (agent.device.family=="Other"){
-    console.log(''+agent.os.family+' '+agent.family);
+    dataObj.DeviceType="PC";
   }
   else{
-    console.log(''+agent.device.family+' '+agent.family);
+    dataObj.DeviceType="Mobile";
   }
-  
+
+  dataObj.Family=agent.os.family;
+  if (dataObj.Family=="Ubuntu" || dataObj.Family=="Linux"){
+      dataObj.Family="linux";
+  }
+  else if (dataObj.Family.indexOf("Windows")>=0){
+      dataObj.Family="windows";
+  }
+  else if (dataObj.Family=="Android"){
+      dataObj.Family="android";
+  }
+
+  data.push(dataObj);
+  console.log(JSON.stringify(dataObj));
   ret.status = 0;
   res.json(ret);
-})
+  return ret;
+});
 
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
-})
+});
