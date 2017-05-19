@@ -148,18 +148,19 @@
               var result = JSON.parse(xhr.responseText)
               var data = result.Data;
               var string = "";
-              for (var i=0; i<= Math.min(data.length,7); ++i)
+              for (var i=0; i<= data.length; ++i)
               {
 
                 var record = data[i];
-                if (record == undefined) break;
                 if (i==0){
                   var aux = millisToMinutesAndSeconds(record.Time);
                   $('#lastOpen').append(aux);
                 }
+                if (i < 8){
+                    var record = data[i];
+                    string += recordToDiv(record);                  
+                }
 
-                var record = data[i];
-                string += recordToDiv(record);
               }
               $('#records').append(string);
 
