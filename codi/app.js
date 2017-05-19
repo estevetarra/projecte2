@@ -4,8 +4,9 @@ var piblaster = require('pi-blaster.js');
 var useragent = require('useragent');
 
 
-var app = express()
+var app = express();
 var servo_pos = 0;
+var data=[];
 
 function getIp(text) {
   if (ipaddr.IPv4.isValid(text)){
@@ -22,7 +23,7 @@ function getIp(text) {
 }
 
 //making files in public served at /
-app.use(express.static('public'))
+app.use(express.static('public'));
 
 app.get('/', function (req, res) {
   var options = {
@@ -40,16 +41,22 @@ app.get('/', function (req, res) {
      console.log('Sent:', "index.html");
    }
  });
-})
+});
 
 app.post('/openDoor', function (req, res) {
+
+  var dataObj={};
+
+  dataObj.Time=Date().now();
+
+  console.log(dataObj.Time);    
+
   function move_pos(pos){
       var servo_pwm=servo_pos*0.2/180;
       piblaster.setPwm(21,servo_pwm);
       console.log ("pwm",servo_pwm);
       console.log ("posicio",servo_pos);
   }
-
 
   var servo_pwm=[0.088,0.05];
   piblaster.setPwm(21,servo_pwm[0],function(){
