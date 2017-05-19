@@ -50,12 +50,11 @@ app.post('/getRecord', function (req, res) {
     ret.Data=[];
 
     var timeNow=Date.now();
-
-    data.forEach(function(e){
-        var e2=e;
-        e2.Time=timeNow-e2.Time;
-        ret.Data.unshift(e2);
-    });
+    for (i in data){
+        var e=data[i];
+        e.Time=timeNow-e.Time;
+        ret.Data.unshift(e);
+    }
 
     res.json(ret);
     return ret;
