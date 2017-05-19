@@ -89,13 +89,21 @@ app.post('/openDoor', function (req, res) {
   console.log(JSON.stringify(agent));
   if (agent.device.family=="Other"){
     dataObj.DeviceType="PC";
-    console.log(''+agent.os.family+' '+agent.family);
   }
   else{
     dataObj.DeviceType="Mobile";
-    console.log(''+agent.device.family+' '+agent.family);
   }
 
+  dataObj.Family=agent.os.family;
+  if (dataObj.Family=="Ubuntu" || dataObj.Family=="Linux"){
+      dataObj.Family="linux";
+  }
+  else if (dataObj.Family.contains("Windows")){
+      dataObj.Family="windows";
+  }
+  else if (dataObj.Family=="Android"){
+      dataObj.Family="android";
+  }
 
   data.push(dataObj);
   console.log(JSON.stringify(dataObj));
