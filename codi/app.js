@@ -43,6 +43,16 @@ app.get('/', function (req, res) {
  });
 });
 
+
+app.post('/getRecord', function (req, res) {
+    ret={};
+    ret.status=0;
+    ret.Data=data;
+    res.json(ret);
+    return ret;
+});
+
+
 app.post('/openDoor', function (req, res) {
 
   var dataObj={};
@@ -82,8 +92,9 @@ app.post('/openDoor', function (req, res) {
   console.log(JSON.stringify(dataObj));
   ret.status = 0;
   res.json(ret);
+  return ret;
 });
 
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
-})
+});
