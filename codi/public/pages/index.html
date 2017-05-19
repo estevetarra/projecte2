@@ -73,8 +73,8 @@
                                   <i class="fa fa-sign-out fa-5x"></i>
                               </div>
                               <div class="col-xs-9 text-right">
-                                  <div class="huge">43</div>
-                                  <div>Minutes since openning</div>
+                                  <div class="huge" id="lastOpen"></div>
+                                  <div>Time since openning</div>
                               </div>
                           </div>
                       </div>
@@ -135,12 +135,10 @@
               }
 
               ret+= record.Name;
-              ret+="<span class='pull-right text-muted small'><em>"
-              var d = new Date();
-              var n = d.getTime();
-              ret+= millisToMinutesAndSeconds(n-record.Time);
-              ret+="minutes ago</em></span>"
-              ret += "</a>"
+              ret+="<span class='pull-right text-muted small'><em>";
+              ret+= millisToMinutesAndSeconds(record.Time);
+              ret+=" ago</em></span>"
+              ret +="</a>"
               return ret;
             }
             var xhr = new XMLHttpRequest();
@@ -152,6 +150,14 @@
               var string = "";
               for (var i=0; i<= Math.min(data.length,7); ++i)
               {
+
+                var record = data[i];
+                if (record == undefined) break;
+                if (i==0){
+                  var aux = millisToMinutesAndSeconds(record.Time);
+                  $('#lastOpen').append(aux);
+                }
+
                 var record = data[i];
                 string += recordToDiv(record);
               }
@@ -189,7 +195,7 @@
               <!-- /.col-lg-4 -->
               <div class="col-lg-8">
                     <div class="panel panel-default">
-                        <div class="panel-heading">
+<!--                        <div class="panel-heading">
                             <i class="fa fa-bar-chart-o fa-fw"></i> Garage stats
                             <div class="pull-right">
                                 <div class="btn-group">
@@ -200,44 +206,24 @@
                                     <ul class="dropdown-menu pull-right" role="menu">
                                         <li><a href="#"> All days</a>
                                         </li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Monday</a>
-                                        </li>
-                                        <li><a href="#">Tuesday</a>
-                                        </li>
-                                        <li><a href="#">Wendsdat</a>
-                                        </li>
-                                        <li><a href="#">Thursday</a>
-                                        </li>
-                                        <li><a href="#">Friday</a>
-                                        </li>
-                                        <li><a href="#">Saturday</a>
-                                        </li>
-                                        <li><a href="#">Sunday</a>
-                                        </li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
+-->
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <div id="morris-area-chart"></div>
+                          <div id="donut-example"></div>
                         </div>
                         <!-- /.panel-body -->
                     </div>
 
               </div>
-
-
                 <!-- /.col-lg-8 -->
-
             </div>
             <!-- /.row -->
         </div>
         <!-- /#page-wrapper -->
-
-
-
     <!-- jQuery -->
     <script src="../vendor/jquery/jquery.min.js"></script>
 
@@ -250,8 +236,39 @@
     <!-- Morris Charts JavaScript -->
     <script src="../vendor/raphael/raphael.min.js"></script>
     <script src="../vendor/morrisjs/morris.min.js"></script>
-    <script src="../data/morris-data.js"></script>
+    <script>
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'http://10.5.3.127:3000/getRecord');
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onload = function() {
+      var result = JSON.parse(xhr.responseText)
+      var data = result.Data;
+      var string = "";
+      var newData = {};
+      for (var i=0; i<= data.length; ++i)
+      {
+        var record = data[i];
+        if (newData.hasOwnProperty(record.Family)) newData[record.Family] += 1;
+        else newData[record.Family] = 1;
+      }
+      var arrayData = [];
+      for (key in newData){
+        var aux = {};
+        aux.label = key;
+        aux.label = newData[key];
+        arrayData.append(aux);
+      }
+      Morris.Donut({
+        element: 'donut-example',
+        data: arrayData
+      });
 
+    }
+
+    xhr.send("");
+
+
+    </script>
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
 
