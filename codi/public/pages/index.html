@@ -162,7 +162,7 @@
                     var aux = {};
                     aux.label = key;
                     aux.label = newData[key];
-                    arrayData.append(aux);
+                    arrayData.unshift(aux);
                 }
                 Morris.Donut({
                     element: 'donut-example',
