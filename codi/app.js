@@ -59,7 +59,7 @@ app.post('/getRecord', function (req, res) {
     for (var i in data){
         var e=JSON.parse(JSON.stringify(data[i]));
         e.Time=timeNow-e.Time;
-        ret.Data.unshift(e);
+        Data.unshift(e);
     }
 
     res.setHeader('Content-Type', 'application/json');
