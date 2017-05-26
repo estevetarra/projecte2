@@ -84,19 +84,15 @@
             <script>
             var sendOpenf = function sendOpen() {
               var xhr = new XMLHttpRequest();
-              xhr.open('POST', 'http://10.5.3.127:3000/openDoor');
-              xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-              xhr.onload = function() {
-                var result = JSON.parse(xhr.responseText)
+              $.post('http://10.5.3.127:3000/openDoor','',function(result) {
                 if (result.status!='0'){
                   alert('We could not reach the door');
                 } else
                 {
-                 location.reload;
+                 location.reload();
                 }
-              }
-              xhr.send("");
-            }
+              },'json');
+            };
             $('#openButton').click(sendOpenf);
             </script>
 
@@ -141,47 +137,40 @@
               ret +="</a>"
               return ret;
             }
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'http://10.5.3.127:3000/getRecord');
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            xhr.onload = function() {
-              var result = JSON.parse(xhr.responseText)
-              var data = result.Data;
-              var string = "";
-              var newData = {};
-              for (var i=0; i<= data.length; ++i)
-              {
+            $.post('http://10.5.3.127:3000/getRecord','',function(result){
+                var data = result.Data;
+                var string = "";
+                var newData = {};
+                for (var i=0; i<= data.length; ++i)
+                {
 
-                var record = data[i];
-                if (i==0){
-                  var aux = millisToMinutesAndSeconds(record.Time);
-                  $('#lastOpen').append(aux);
-                }
-                if (i < 8){
                     var record = data[i];
-                    string += recordToDiv(record);
+                    if (i==0){
+                        var aux = millisToMinutesAndSeconds(record.Time);
+                        $('#lastOpen').append(aux);
+                    }
+                    if (i < 8){
+                        var record = data[i];
+                        string += recordToDiv(record);
+                    }
+                    if (newData.hasOwnProperty(record.Family)) newData[record.Family] += 1;
+                    else newData[record.Family] = 1;
+
                 }
-                if (newData.hasOwnProperty(record.Family)) newData[record.Family] += 1;
-                else newData[record.Family] = 1;
+                var arrayData = [];
+                for (key in newData){
+                    var aux = {};
+                    aux.label = key;
+                    aux.label = newData[key];
+                    arrayData.append(aux);
+                }
+                Morris.Donut({
+                    element: 'donut-example',
+                    data: arrayData
+                });
 
-              }
-              var arrayData = [];
-              for (key in newData){
-                var aux = {};
-                aux.label = key;
-                aux.label = newData[key];
-                arrayData.append(aux);
-              }
-              Morris.Donut({
-                element: 'donut-example',
-                data: arrayData
-              });
-
-              $('#records').append(string);
-
-            }
-
-            xhr.send("");
+                $('#records').append(string);
+            },'json');
             </script>
 
             <!-- Info (Cars , Motorcycles, Last Oppening) -->
