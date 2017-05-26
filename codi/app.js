@@ -62,7 +62,8 @@ app.post('/getRecord', function (req, res) {
         ret.Data.unshift(e);
     }
 
-    res.send(status+' '+Data);
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify({ status:0 , Data: Data}));
 });
 
 
