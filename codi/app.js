@@ -51,7 +51,7 @@ app.post('/getRecord', function (req, res) {
 
     var timeNow=Date.now();
     for (var i in data){
-        var e=data[i];
+        var e=JSON.parse(JSON.stringify(data[i]));
         e.Time=timeNow-e.Time;
         ret.Data.unshift(e);
     }
