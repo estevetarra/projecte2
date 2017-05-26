@@ -157,13 +157,16 @@
                     else newData[record.Family] = 1;
 
                 }
+                console.log('newData' + JSON.stringify(newData));
                 var arrayData = [];
                 for (key in newData){
                     var aux = {};
                     aux.label = key;
-                    aux.label = newData[key];
+                    aux.value = newData[key];
                     arrayData.unshift(aux);
                 }
+                console.log('arrayData' + JSON.stringify(arrayData));
+
                 Morris.Donut({
                     element: 'donut-example',
                     data: arrayData
