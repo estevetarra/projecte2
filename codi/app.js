@@ -2,9 +2,15 @@
 var ipaddr = require('ipaddr.js');
 var piblaster = require('pi-blaster.js');
 var useragent = require('useragent');
-
+var bodyParser = require('body-parser');
 
 var app = express();
+
+
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+
+
 var servo_pos = 0;
 var data=[];
 
@@ -45,9 +51,9 @@ app.get('/', function (req, res) {
 
 
 app.post('/getRecord', function (req, res) {
-    var ret={};
-    ret.status=0;
-    ret.Data=[];
+
+    var status=0;
+    var Data=[];
 
     var timeNow=Date.now();
     for (var i in data){
@@ -56,8 +62,7 @@ app.post('/getRecord', function (req, res) {
         ret.Data.unshift(e);
     }
 
-    res.json(ret);
-    return ret;
+    res.send(status+' '+Data);
 });
 
 
