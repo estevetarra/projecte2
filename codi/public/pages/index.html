@@ -96,85 +96,7 @@
             $('#openButton').click(sendOpenf);
             </script>
 
-            <script>
-            //<a href="#" class="list-group-item">
-            //  <i class="fa fa-apple fa-fw"></i> Door open
-            //    <span class="pull-right text-muted small"><em>44 minutes ago</em>
-            //    </span>
-            //</a>
-            function millisToMinutesAndSeconds(millis) {
-              var minutes = Math.floor(millis / 60000);
-              var seconds = ((millis % 60000) / 1000).toFixed(0);
-              return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
-            }
-            function recordToDiv(record){
-              var ret = "";
-              ret += "<a href='#' class='list-group-item'>";
-              if (record.DeviceType == "Mobile"){
-                ret += "<i class='fa fa-mobile fa-fw'></i>";
-              } else if (record.DeviceType == "PC") {
-                ret += "<i class='fa fa-desktop fa-fw'></i>";
-              } else {
-                console.log("Unknown DeviceType: " + record.DeviceType);
-              }
 
-              if (record.Family == "iOS"){
-                ret += "<i class='fa fa-apple fa-fw'></i>";
-              } else if (record.Family == "android") {
-                ret += "<i class='fa fa-android fa-fw'></i>";
-              } else if (record.Family == "linux") {
-                ret += "<i class='fa fa-linux fa-fw'></i>";
-              }else if (record.Family == "windows") {
-                ret += "<i class='fa fa-windows fa-fw'></i>";
-              }else {
-                console.log("Unknown Family: " + record.Family);
-              }
-
-              ret+= record.Name;
-              ret+="<span class='pull-right text-muted small'><em>";
-              ret+= millisToMinutesAndSeconds(record.Time);
-              ret+=" ago</em></span>"
-              ret +="</a>"
-              return ret;
-            }
-            $.post('http://10.5.3.127:3000/getRecord','',function(result){
-                var data = result.Data;
-                var string = "";
-                var newData = {};
-                for (var i=0; i< data.length; ++i)
-                {
-
-                    var record = data[i];
-                    if (i==0){
-                        var aux = millisToMinutesAndSeconds(record.Time);
-                        $('#lastOpen').append(aux);
-                    }
-                    if (i < 8){
-                        var record = data[i];
-                        string += recordToDiv(record);
-                    }
-                    if (newData.hasOwnProperty(record.Family)) newData[record.Family] += 1;
-                    else newData[record.Family] = 1;
-
-                }
-                console.log('newData' + JSON.stringify(newData));
-                var arrayData = [];
-                for (key in newData){
-                    var aux = {};
-                    aux.label = key;
-                    aux.value = newData[key];
-                    arrayData.unshift(aux);
-                }
-                console.log('arrayData' + JSON.stringify(arrayData));
-
-                Morris.Donut({
-                    element: 'donut-example',
-                    data: arrayData
-                });
-
-                $('#records').append(string);
-            },'json');
-            </script>
 
             <!-- Info (Cars , Motorcycles, Last Oppening) -->
             <div class="row">
@@ -279,7 +201,85 @@
   </script-->
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
+        <script>
+            //<a href="#" class="list-group-item">
+            //  <i class="fa fa-apple fa-fw"></i> Door open
+            //    <span class="pull-right text-muted small"><em>44 minutes ago</em>
+            //    </span>
+            //</a>
+            function millisToMinutesAndSeconds(millis) {
+                var minutes = Math.floor(millis / 60000);
+                var seconds = ((millis % 60000) / 1000).toFixed(0);
+                return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+            }
+            function recordToDiv(record){
+                var ret = "";
+                ret += "<a href='#' class='list-group-item'>";
+                if (record.DeviceType == "Mobile"){
+                    ret += "<i class='fa fa-mobile fa-fw'></i>";
+                } else if (record.DeviceType == "PC") {
+                    ret += "<i class='fa fa-desktop fa-fw'></i>";
+                } else {
+                    console.log("Unknown DeviceType: " + record.DeviceType);
+                }
 
+                if (record.Family == "iOS"){
+                    ret += "<i class='fa fa-apple fa-fw'></i>";
+                } else if (record.Family == "android") {
+                    ret += "<i class='fa fa-android fa-fw'></i>";
+                } else if (record.Family == "linux") {
+                    ret += "<i class='fa fa-linux fa-fw'></i>";
+                }else if (record.Family == "windows") {
+                    ret += "<i class='fa fa-windows fa-fw'></i>";
+                }else {
+                    console.log("Unknown Family: " + record.Family);
+                }
+
+                ret+= record.Name;
+                ret+="<span class='pull-right text-muted small'><em>";
+                ret+= millisToMinutesAndSeconds(record.Time);
+                ret+=" ago</em></span>"
+                ret +="</a>"
+                return ret;
+            }
+            $.post('http://10.5.3.127:3000/getRecord','',function(result){
+                var data = result.Data;
+                var string = "";
+                var newData = {};
+                for (var i=0; i< data.length; ++i)
+                {
+
+                    var record = data[i];
+                    if (i==0){
+                        var aux = millisToMinutesAndSeconds(record.Time);
+                        $('#lastOpen').append(aux);
+                    }
+                    if (i < 8){
+                        var record = data[i];
+                        string += recordToDiv(record);
+                    }
+                    if (newData.hasOwnProperty(record.Family)) newData[record.Family] += 1;
+                    else newData[record.Family] = 1;
+
+                }
+                console.log('newData' + JSON.stringify(newData));
+                var arrayData = [];
+                for (key in newData){
+                    var aux = {};
+                    aux.label = key;
+                    aux.value = newData[key];
+                    arrayData.unshift(aux);
+                }
+                console.log('arrayData' + JSON.stringify(arrayData));
+
+                Morris.Donut({
+                    element: 'donut-example',
+                    data: arrayData
+                });
+
+                $('#records').append(string);
+            },'json');
+        </script>
 </body>
 
 </html>
